@@ -1,0 +1,18 @@
+docker run \
+-p 9000:9000 \
+-p 9001:9001 \
+--name minio \
+-v ~/minio/data:/data \
+-e "MINIO_ROOT_USER=ROOTNAME" \
+-e "MINIO_ROOT_PASSWORD=CHANGEME123" \
+quay.io/minio/minio server /data --console-address ":9001"
+
+
+Some chinese guy told me that
+ access_key_id = "ROOTNAME";
+ secret_access_key = "CHANGEME123";
+by defualt on start
+so i dont think we should touch the key in the
+local minio server 5555
+
+

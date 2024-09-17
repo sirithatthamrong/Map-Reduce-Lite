@@ -1,0 +1,58 @@
+[package]
+name = "mrlite"
+version = "0.1.0"
+edition = "2021"
+build = "build.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[build-dependencies]
+tonic-build = "0.11.0"
+
+[dependencies]
+anyhow = "1.0.86"
+bytes = "1.6.0"
+clap = { version = "4.5.4", features = ["derive"] }
+fnv = "1.0.7"
+serde = { version = "1.0.140", features = ["derive"] }
+log = "0.4.17"
+uuid = { version = "1.1.2", features = ["v4"] }
+glob = "0.3.1"
+dashmap = { version = "5.5.3", features = ["rayon"] }
+itertools = "0.13.0"
+serde_json = "1.0.117"
+aws-config = { version = "1.1.7", features = ["behavior-version-latest"] }
+aws-sdk-s3 = "1.38.0"
+tokio = { version = "1", features = ["full"] }
+tonic = "0.11.0"
+prost = "0.12.6"
+tonic-build = "0.11.0"
+encoding = "0.2.33"
+
+# aws stuff thingy
+
+aws-types = {version="0.56.1"}
+aws_auth = "0.1.0"
+aws-sig-auth = "0.60.3"
+tracing = "0.1.40"
+encoding_rs = "0.8.34"
+arrow = "52.0.0"
+parquet = { version = "52.0.0", features = ["arrow"] }
+aws-smithy-types = "1.2.0"
+
+
+[[bin]]
+name = "mrl-ctl"
+path = "src/app/mrl-ctl.rs"
+
+[[bin]]
+name = "mrl-worker"
+path = "src/app/mrl-worker.rs"
+
+[[bin]]
+name = "mrl-coordinator"
+path = "src/app/mrl-coordinator.rs"
+
+[[bin]]
+name = "standalone"
+path = "src/app/standalone.rs"

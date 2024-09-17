@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package mapreduce;
+
+service Coordinator {
+  rpc RegisterWorker(WorkerRegistration) returns (WorkerResponse);
+  rpc GetTask(WorkerRequest) returns (Task);
+  rpc SubmitJob(JobRequest) returns (JobResponse);
+  rpc ListJobs(JobListRequest) returns (JobList);
+  rpc SystemStatus(Empty) returns (Status);
+  rpc ReportTask(WorkerReport) returns (WorkerResponse);
+  rpc GetWorkerCount(WorkerCountRequest) returns (WorkerCountResponse);
+}
+
+message WorkerCountRequest {}
+
+message WorkerCountResponse {
+  int32 count = 1;
+}
+
+message WorkerRegistration {}
+
+message WorkerResponse {
+  bool success = 1;
+  string message = 2;
+  map<string, string> args = 3;
+}
+
+message WorkerRequest {}
+
+message WorkerReport {
+  string task = 1;
+  string input = 2;
+  repeated string output = 3;
+}
+
+message Task {
+  string input = 1;
+  string workload = 2;
+  string output = 3;
+  string args = 4;
+  string status = 5;
+}
+
+message JobRequest {
+  string input = 1;
+  string workload = 2;
+  string output = 3;
+  string args = 4;
+}
+
+message JobResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message Empty {}
+
+message JobListRequest {
+  string show = 1;
+}
+
+message JobList {
+  repeated Task jobs = 1;
+}
+
+message Status {
+  int32 worker_count = 1;
+  repeated Worker workers = 2;
+  repeated Task jobs = 3;
+}
+
+message Worker {
+  string address = 1;
+  string state = 2;
+}
